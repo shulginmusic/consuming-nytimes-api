@@ -19,7 +19,7 @@ public class NYTimesService {
     RestTemplate restTemplate;
 
     String baseURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=";
-    String apiKey = ""; //your NY Times API key here
+    String apiKey = ""; //your NY Times API key here, formatted like: "&api-key=KEY"
 
     /**
      * This method returns a New York Times response for a query
@@ -42,8 +42,7 @@ public class NYTimesService {
      * @return the New York times API response in JSON
      */
 
-    public NYTimesAPIResponse getArticlesWithPage(@RequestParam("q") String query,
-                                                  @RequestParam("page") String page) {
+    public NYTimesAPIResponse getArticlesWithPage(String query, String page) {
         String url = baseURL + query + "page=" + page + apiKey;
         //Get API response
         NYTimesAPIResponse response =
@@ -61,7 +60,7 @@ public class NYTimesService {
      * @return the number of times a word appears for a given query
      */
 
-    public CountResponse countOccurences(@RequestParam("q") String query, @RequestParam("keyword") String keyword) {
+    public CountResponse countOccurences(String query, String keyword) {
         //Declare a count variable
         int count = 0;
         //This String array will hold the words from a String
@@ -108,8 +107,7 @@ public class NYTimesService {
      * @return a simple pojo with the n most common words and their occurences
      */
 
-    public MostCommonWordsResponse mostCommon(@RequestParam("q") String query,
-                                              @RequestParam("n") int numberOfWords) {
+    public MostCommonWordsResponse getMostCommonWordsInQuery(String query, int numberOfWords) {
         //This String array will hold the words from the String objects
         ArrayList<String> words = new ArrayList<>();
 
@@ -184,7 +182,7 @@ public class NYTimesService {
      * @return average number of images per article
      */
 
-    public int getAverageImages(@RequestParam("q") String query) {
+    public int getAverageImages(String query) {
         //First of all, get the API response
         NYTimesAPIResponse response =
                 restTemplate.getForObject(baseURL + query + apiKey, NYTimesAPIResponse.class);
