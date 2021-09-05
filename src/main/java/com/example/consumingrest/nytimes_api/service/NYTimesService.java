@@ -19,7 +19,7 @@ public class NYTimesService {
     RestTemplate restTemplate;
 
     String baseURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=";
-    String apiKey = ""; //your NY Times API key here, formatted like: "&api-key=KEY"
+    String apiKey = "&api-key=JGAOacVr0VVUDFgo1ZCgIUfLLwiYFc5J"; //your NY Times API key here, formatted like: "&api-key=KEY"
 
     /**
      * This method returns a New York Times response for a query
@@ -29,8 +29,10 @@ public class NYTimesService {
      */
 
     public NYTimesAPIResponse getArticles(String query) {
+        //Get API response
         NYTimesAPIResponse response =
-                restTemplate.getForObject(baseURL + query + apiKey, NYTimesAPIResponse.class);
+                restTemplate.getForObject(
+                        baseURL + query + "&page=" + 0 + apiKey, NYTimesAPIResponse.class);
         return response;
     }
 
@@ -67,7 +69,8 @@ public class NYTimesService {
         String[] words = null;
         //Get API response
         NYTimesAPIResponse response =
-                restTemplate.getForObject(baseURL + query + apiKey, NYTimesAPIResponse.class);
+                restTemplate.getForObject(
+                        baseURL + query + "&page=" + 0 + apiKey, NYTimesAPIResponse.class);
         //Loop over all the Doc objects in the docs array of the response
         for (Doc doc : response.getResponse().getDocs()) {
 
@@ -113,7 +116,8 @@ public class NYTimesService {
 
         //Get API response
         NYTimesAPIResponse response =
-                restTemplate.getForObject(baseURL + query + apiKey, NYTimesAPIResponse.class);
+                restTemplate.getForObject(
+                        baseURL + query + "&page=" + 0 + apiKey, NYTimesAPIResponse.class);
 
         //Loop over all the Doc objects in the docs array of the response
         //Splitting the String objects and adding to the words ArrayList
@@ -183,9 +187,10 @@ public class NYTimesService {
      */
 
     public int getAverageImages(String query) {
-        //First of all, get the API response
+        //Get API response
         NYTimesAPIResponse response =
-                restTemplate.getForObject(baseURL + query + apiKey, NYTimesAPIResponse.class);
+                restTemplate.getForObject(
+                        baseURL + query + "&page=" + 0 + apiKey, NYTimesAPIResponse.class);
 
         //Variable to hold how many images appear in response total
         int totalImages = 0;
