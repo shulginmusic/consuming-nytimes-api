@@ -1,6 +1,7 @@
 package com.example.consumingrest.nytimes_api.service;
 
 import com.example.consumingrest.nytimes_api.model.Doc;
+import com.example.consumingrest.nytimes_api.payload.response.AvgImagesResponse;
 import com.example.consumingrest.nytimes_api.payload.response.CountResponse;
 import com.example.consumingrest.nytimes_api.payload.response.MostCommonWordsResponse;
 import com.example.consumingrest.nytimes_api.payload.response.NYTimesAPIResponse;
@@ -19,7 +20,7 @@ public class NYTimesService {
     RestTemplate restTemplate;
 
     String baseURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=";
-    String apiKey = "&api-key=JGAOacVr0VVUDFgo1ZCgIUfLLwiYFc5J"; //your NY Times API key here, formatted like: "&api-key=KEY"
+    String apiKey = ""; //your NY Times API key here, formatted like: "&api-key=KEY"
 
     /**
      * This method returns a New York Times response for a query
@@ -186,7 +187,7 @@ public class NYTimesService {
      * @return average number of images per article
      */
 
-    public int getAverageImages(String query) {
+    public AvgImagesResponse getAverageImages(String query) {
         //Get API response
         NYTimesAPIResponse response =
                 restTemplate.getForObject(
@@ -203,7 +204,11 @@ public class NYTimesService {
         for (Doc doc : response.getResponse().getDocs()) {
             totalImages += doc.multimedia.length;
         }
-        return totalImages / totalDocs;
+
+        int averageImages = totalImages / totalDocs;
+
+        return new AvgImagesResponse(query, averageImages);
+
     }
 
     /**

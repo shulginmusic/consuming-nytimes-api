@@ -1,5 +1,6 @@
 package com.example.consumingrest.nytimes_api.controller;
 
+import com.example.consumingrest.nytimes_api.payload.response.AvgImagesResponse;
 import com.example.consumingrest.nytimes_api.payload.response.CountResponse;
 import com.example.consumingrest.nytimes_api.payload.response.MostCommonWordsResponse;
 import com.example.consumingrest.nytimes_api.payload.response.NYTimesAPIResponse;
@@ -21,7 +22,7 @@ public class TimesController {
      * @param query the query to be searched for
      * @return the New York times API response in JSON
      */
-    @RequestMapping("/nytimes")
+    @RequestMapping("/nytimes")//?q="query"
     public NYTimesAPIResponse getArticles(@RequestParam("q") String query) {
         return service.getArticles(query);
     }
@@ -33,9 +34,9 @@ public class TimesController {
      * @param page  the page specified (pages start from 0)
      * @return the New York times API response in JSON
      */
-    @RequestMapping("nytimes/page")
+    @RequestMapping("nytimes/page")//?q="query"&page="page-number"
     public NYTimesAPIResponse getArticlesWithPage(@RequestParam("q") String query,
-                                                  @RequestParam("page") String page) {
+                                                  @RequestParam("p") String page) {
         return service.getArticlesWithPage(query, page);
     }
 
@@ -48,7 +49,7 @@ public class TimesController {
      * @return the number of times a word appears for a given query
      */
 
-    @RequestMapping("/nytimes/count")
+    @RequestMapping("/nytimes/count")//?q="query"&keyword="keyword"
     public CountResponse countOccurences(@RequestParam("q") String query, @RequestParam("keyword") String keyword) {
         return service.countOccurences(query, keyword);
     }
@@ -57,13 +58,13 @@ public class TimesController {
      * This method returns the n most common words in a query, filtered by an english stop word list
      * @param query the query to be searched for
      * @param numberOfWords the n most common words the user wants
-     * @return a simple pojo with the n most common words and their occurences
+     * @return a simple pojo with the n most common words and their occurrences
      */
 
-    @GetMapping("/nytimes/mostcommon")
+    @GetMapping("/nytimes/mostcommon")//?q="query"&n="numberOfWords"
     public MostCommonWordsResponse mostCommon(@RequestParam("q") String query,
                                               @RequestParam("n") int numberOfWords) {
-        return service.mostCommon(query, numberOfWords);
+        return service.getMostCommonWordsInQuery(query, numberOfWords);
     }
 
     /**
@@ -73,8 +74,8 @@ public class TimesController {
      * @return average number of images per article
      */
 
-    @RequestMapping("/nytimes/avg_image")
-    public int getAverageImages(@RequestParam("q") String query) {
+    @RequestMapping("/nytimes/avg_images")//?q="query"
+    public AvgImagesResponse getAverageImages(@RequestParam("q") String query) {
         return service.getAverageImages(query);
     }
 
