@@ -1,4 +1,4 @@
-package com.example.consumingrest.nytimes_api;
+package com.example.consumingrest.nytimes_api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -10,6 +10,6 @@ import lombok.*;
 @ToString
 public class Headline {
     @JsonProperty("main")
-    String mainStr;
-    String print_headline;
+    public String mainStr;
+    public String print_headline;
 }

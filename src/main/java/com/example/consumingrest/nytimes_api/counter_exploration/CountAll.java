@@ -1,4 +1,4 @@
-package com.example.consumingrest.nytimes_api;
+package com.example.consumingrest.nytimes_api.counter_exploration;
 
 public class CountAll {
     public static void main(String[] args) {

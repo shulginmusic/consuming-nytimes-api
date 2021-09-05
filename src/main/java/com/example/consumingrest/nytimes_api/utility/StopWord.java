@@ -1,7 +1,10 @@
-package com.example.consumingrest.nytimes_api;
+package com.example.consumingrest.nytimes_api.utility;
 
+/**
+ * This is a list of stop words in English
+ */
 public class StopWord {
-    final String stopWords = "'ll\n" +
+    public final String stopWords = "'ll\n" +
             "'tis\n" +
             "'twas\n" +
             "'ve\n" +

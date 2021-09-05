@@ -1,5 +1,9 @@
-package com.example.consumingrest.nytimes_api;
+package com.example.consumingrest.nytimes_api.controller;
 
+import com.example.consumingrest.nytimes_api.payload.response.CountResponse;
+import com.example.consumingrest.nytimes_api.payload.response.MostCommonWordsResponse;
+import com.example.consumingrest.nytimes_api.payload.response.NYTimesAPIResponse;
+import com.example.consumingrest.nytimes_api.service.NYTimesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,8 +61,8 @@ public class TimesController {
      */
 
     @GetMapping("/nytimes/mostcommon")
-    public MostCommonWords mostCommon(@RequestParam("q") String query,
-                           @RequestParam("n") int numberOfWords) {
+    public MostCommonWordsResponse mostCommon(@RequestParam("q") String query,
+                                              @RequestParam("n") int numberOfWords) {
         return service.mostCommon(query, numberOfWords);
     }
 

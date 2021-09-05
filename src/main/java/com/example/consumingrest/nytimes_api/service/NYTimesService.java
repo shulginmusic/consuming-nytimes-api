@@ -1,9 +1,13 @@
-package com.example.consumingrest.nytimes_api;
+package com.example.consumingrest.nytimes_api.service;
 
+import com.example.consumingrest.nytimes_api.model.Doc;
+import com.example.consumingrest.nytimes_api.payload.response.CountResponse;
+import com.example.consumingrest.nytimes_api.payload.response.MostCommonWordsResponse;
+import com.example.consumingrest.nytimes_api.payload.response.NYTimesAPIResponse;
+import com.example.consumingrest.nytimes_api.utility.StopWord;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
@@ -104,8 +108,8 @@ public class NYTimesService {
      * @return a simple pojo with the n most common words and their occurences
      */
 
-    public MostCommonWords mostCommon(@RequestParam("q") String query,
-                                      @RequestParam("n") int numberOfWords) {
+    public MostCommonWordsResponse mostCommon(@RequestParam("q") String query,
+                                              @RequestParam("n") int numberOfWords) {
         //This String array will hold the words from the String objects
         ArrayList<String> words = new ArrayList<>();
 
@@ -169,7 +173,7 @@ public class NYTimesService {
 
         mostCommonWords = mostCommonWords.subList(0, numberOfWords);
         //Return a new MostCommonWords POJO
-        return new MostCommonWords(query, numberOfWords, mostCommonWords);
+        return new MostCommonWordsResponse(query, numberOfWords, mostCommonWords);
 
     }
 

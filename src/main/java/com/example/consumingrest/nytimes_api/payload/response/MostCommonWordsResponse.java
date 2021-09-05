@@ -1,4 +1,4 @@
-package com.example.consumingrest.nytimes_api;
+package com.example.consumingrest.nytimes_api.payload.response;
 
 import lombok.*;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class MostCommonWords {
+public class MostCommonWordsResponse {
     String query;
     int numberOfWords;
     List<Map.Entry<String, Integer>> mostCommonWords;

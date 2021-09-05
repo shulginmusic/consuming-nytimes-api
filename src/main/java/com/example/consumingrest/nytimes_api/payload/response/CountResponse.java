@@ -1,4 +1,4 @@
-package com.example.consumingrest.nytimes_api;
+package com.example.consumingrest.nytimes_api.payload.response;
 
 import lombok.*;
 
