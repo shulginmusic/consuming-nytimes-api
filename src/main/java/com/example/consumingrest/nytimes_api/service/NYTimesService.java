@@ -7,7 +7,9 @@ import com.example.consumingrest.nytimes_api.payload.response.MostCommonWordsRes
 import com.example.consumingrest.nytimes_api.payload.response.NYTimesAPIResponse;
 import com.example.consumingrest.nytimes_api.utility.StopWord;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -16,11 +18,14 @@ import java.util.*;
 
 @Service
 public class NYTimesService {
+    @Value("${app.key}")
+    private String APIKey;
+
     @Autowired
     RestTemplate restTemplate;
 
     String baseURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=";
-    String apiKey = ""; //your NY Times API key here, formatted like: "&api-key=KEY"
+    String apiKey = "&api-key=" + APIKey; //your NY Times API key here, formatted like: "&api-key=KEY"
 
     /**
      * This method returns a New York Times response for a query
@@ -259,6 +264,5 @@ public class NYTimesService {
         }
         return filteredCommonWords;
     }
-
 
 }

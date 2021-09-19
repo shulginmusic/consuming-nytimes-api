@@ -74,7 +74,7 @@ public class TimesController {
      * @return average number of images per article
      */
 
-    @RequestMapping("/nytimes/avg_images")//?q="query"
+    @RequestMapping("/nytimes/avg-images")//?q="query"
     public AvgImagesResponse getAverageImages(@RequestParam("q") String query) {
         return service.getAverageImages(query);
     }
