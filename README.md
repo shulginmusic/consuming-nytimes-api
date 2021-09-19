@@ -32,13 +32,13 @@ Java 11, Maven, Postman (or browser with JSON plugin), IDE of your choice
 
 * Using Postman or browser, send a GET request with a query to http://localhost:8080/nytimes?q=QUERY
 
-<img src="img/query.png" width="700">
+<img src="img/query.png" width="1100">
 
 ##  Querying by Page Number
 
 * Send a GET request with a query and a page number (starting at 0) to http://localhost:8080/nytimes/page?q=QUERY&p=PAGE# 
 
-<img src="img/page.png" width="700">
+<img src="img/page.png" width="1100">
 
 # Complex Queries & Data Parsing
 
@@ -48,7 +48,7 @@ Java 11, Maven, Postman (or browser with JSON plugin), IDE of your choice
 
 * Receive the amount of times a word appears in a query
 
-<img src="img/count.png" width="700">
+<img src="img/count.png" width="1100">
 
 ##  Most Common Words
 
@@ -57,7 +57,7 @@ Java 11, Maven, Postman (or browser with JSON plugin), IDE of your choice
 * The data is filtered by a stop word list
 * Discover the n most common words in a query
 
-<img src="img/most_common.png" width="700">
+<img src="img/most_common.png" width="1100">
 
 
 ##  Average images
@@ -66,7 +66,7 @@ Java 11, Maven, Postman (or browser with JSON plugin), IDE of your choice
 
 * Discover the average number of images per article for your query
 
-<img src="img/avg_images.png" width="700">
+<img src="img/avg_images.png" width="500">
 
 # Credits
 
