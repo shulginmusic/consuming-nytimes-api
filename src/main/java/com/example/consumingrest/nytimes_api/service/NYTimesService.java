@@ -7,25 +7,30 @@ import com.example.consumingrest.nytimes_api.payload.response.MostCommonWordsRes
 import com.example.consumingrest.nytimes_api.payload.response.NYTimesAPIResponse;
 import com.example.consumingrest.nytimes_api.utility.StopWord;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
 @Service
+@PropertySource("classpath:application.properties")
 public class NYTimesService {
-    @Value("${app.key}")
-    private String APIKey;
+
+    private String apikey;
+    private RestTemplate restTemplate;
+    private String apiKeySnippet;
+
+    private final String BASE_URL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=";
 
     @Autowired
-    RestTemplate restTemplate;
-
-    String baseURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=";
-    String apiKey = "&api-key=" + APIKey; //your NY Times API key here, formatted like: "&api-key=KEY"
+    public NYTimesService(@Value("${api_key}") String apikey, RestTemplate restTemplate) {
+        this.apikey = apikey;
+        this.restTemplate = restTemplate;
+        this.apiKeySnippet = "&api-key=" + apikey; //your NY Times API key here, formatted like: "&api-key=KEY"
+    }
 
     /**
      * This method returns a New York Times response for a query
@@ -38,7 +43,7 @@ public class NYTimesService {
         //Get API response
         NYTimesAPIResponse response =
                 restTemplate.getForObject(
-                        baseURL + query + "&page=" + 0 + apiKey, NYTimesAPIResponse.class);
+                        BASE_URL + query + "&page=" + 0 + apiKeySnippet, NYTimesAPIResponse.class);
         return response;
     }
 
@@ -51,11 +56,11 @@ public class NYTimesService {
      */
 
     public NYTimesAPIResponse getArticlesWithPage(String query, String page) {
-        String url = baseURL + query + "page=" + page + apiKey;
+        String url = BASE_URL + query + "page=" + page + apiKeySnippet;
         //Get API response
         NYTimesAPIResponse response =
                 restTemplate.getForObject(
-                        baseURL + query + "&page=" + page + apiKey, NYTimesAPIResponse.class);
+                        BASE_URL + query + "&page=" + page + apiKeySnippet, NYTimesAPIResponse.class);
         return response;
     }
 
@@ -76,7 +81,7 @@ public class NYTimesService {
         //Get API response
         NYTimesAPIResponse response =
                 restTemplate.getForObject(
-                        baseURL + query + "&page=" + 0 + apiKey, NYTimesAPIResponse.class);
+                        BASE_URL + query + "&page=" + 0 + apiKeySnippet, NYTimesAPIResponse.class);
         //Loop over all the Doc objects in the docs array of the response
         for (Doc doc : response.getResponse().getDocs()) {
 
@@ -123,7 +128,7 @@ public class NYTimesService {
         //Get API response
         NYTimesAPIResponse response =
                 restTemplate.getForObject(
-                        baseURL + query + "&page=" + 0 + apiKey, NYTimesAPIResponse.class);
+                        BASE_URL + query + "&page=" + 0 + apiKeySnippet, NYTimesAPIResponse.class);
 
         //Loop over all the Doc objects in the docs array of the response
         //Splitting the String objects and adding to the words ArrayList
@@ -196,7 +201,7 @@ public class NYTimesService {
         //Get API response
         NYTimesAPIResponse response =
                 restTemplate.getForObject(
-                        baseURL + query + "&page=" + 0 + apiKey, NYTimesAPIResponse.class);
+                        BASE_URL + query + "&page=" + 0 + apiKeySnippet, NYTimesAPIResponse.class);
 
         //Variable to hold how many images appear in response total
         int totalImages = 0;
