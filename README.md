@@ -70,7 +70,7 @@ Java 11, Maven, Postman (or browser with JSON plugin), IDE of your choice
 
 # Credits
 
-A HUGE thank you to the following awesome people and their tutorials that helped me navigate the world of JWT and create this project
+A HUGE thank you to the following awesome people and their tutorials that helped me navigate the world of Spring Boot and create this project
 
 * Coding Nomads (special thanks to Ryan and Jared)
 
